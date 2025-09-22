@@ -1,0 +1,34 @@
+# Dependencias para el proyecto Python con arquitectura MVC
+
+# Conexión a base de datos MySQL
+mysql-connector-python>=8.2.0
+
+# Manejo de variables de entorno
+python-dotenv>=1.0.0
+
+# Manejo de zonas horarias
+pytz>=2023.3
+
+# Validación de datos (opcional para validaciones avanzadas)
+marshmallow>=3.20.1
+
+# Logging avanzado (opcional)
+colorlog>=6.7.0
+
+# Utilidades de fecha y hora (opcional)
+python-dateutil>=2.8.2
+
+# Interfaz gráfica moderna
+customtkinter>=5.2.0
+
+# Soporte para imágenes (compatible con Python 3.13)
+Pillow>=10.2.0
+
+# Encriptación de contraseñas
+bcrypt>=4.1.2
+
+# Generación de UUIDs (incluido en Python estándar)
+# uuid - incluido en Python estándar
+
+# HTTP requests para APIs de agentes IA
+requests>=2.31.0
