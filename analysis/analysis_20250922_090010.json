@@ -1,0 +1,70 @@
+{
+  "timestamp": "2025-09-22T09:00:10.693399",
+  "structure": {
+    "total_files": 61,
+    "by_type": {
+      ".example": 1,
+      "no_extension": 1,
+      ".md": 7,
+      ".py": 44,
+      ".txt": 1,
+      ".json": 1,
+      ".sql": 3,
+      ".log": 3
+    },
+    "by_directory": {
+      ".": 8,
+      ".\\agents": 8,
+      ".\\agents\\internal": 3,
+      ".\\components": 1,
+      ".\\components\\agents": 1,
+      ".\\components\\layout": 3,
+      ".\\components\\pages": 1,
+      ".\\components\\ui": 7,
+      ".\\config": 3,
+      ".\\controllers": 2,
+      ".\\database": 3,
+      ".\\logs": 3,
+      ".\\models": 7,
+      ".\\reportes": 4,
+      ".\\utils": 5,
+      ".\\views": 2
+    },
+    "large_files": [],
+    "security_files": []
+  },
+  "vulnerabilities": [
+    {
+      "type": "SENSITIVE_FILE",
+      "severity": "HIGH",
+      "file": ".\\.env",
+      "description": "Archivo sensible detectado: .env"
+    },
+    {
+      "type": "SENSITIVE_FILE",
+      "severity": "HIGH",
+      "file": ".\\.env.example",
+      "description": "Archivo sensible detectado: .env.example"
+    }
+  ],
+  "improvements": [
+    {
+      "category": "SECURITY",
+      "priority": "HIGH",
+      "description": "Corregir vulnerabilidades de seguridad detectadas",
+      "count": 2
+    },
+    {
+      "category": "DOCUMENTATION",
+      "priority": "MEDIUM",
+      "description": "Agregar documentación de API y componentes"
+    }
+  ],
+  "metrics": {
+    "total_lines": 7541,
+    "python_files": 44,
+    "comment_lines": 428,
+    "empty_lines": 1344,
+    "complexity": "high"
+  }
+}

@@ -15,6 +15,7 @@ from utils.report_generator import ReportGenerator
 from models.history_model import HistoryModel
 from models.agent_model import AgentModel
 from agents import AgentFactory
+from agents.specialized.token_tracker_agent import TokenTrackerAgent
 
 
 class ChatInterface:
@@ -41,6 +42,7 @@ class ChatInterface:
         self.report_generator = ReportGenerator()
         self.history_model = HistoryModel()
         self.agent_model = AgentModel()
+        self.token_tracker = TokenTrackerAgent()
 
         self.create_chat_interface()
 
@@ -221,6 +223,9 @@ class ChatInterface:
                 response,
                 response_time_ms
             )
+
+            # Registrar uso de tokens si el agente lo proporciona
+            self.track_token_usage(message, response)
 
             # Guardar en base de datos
             self.save_interaction_to_db(message, response, response_time_ms)
@@ -513,3 +518,42 @@ class ChatInterface:
 
         self.messages_text.see("end")
         self.chat_history.append({"type": "system", "message": message, "timestamp": timestamp})
+
+    def track_token_usage(self, user_message: str, agent_response: str):
+        """Registra el uso de tokens en el token tracker"""
+        try:
+            if not self.current_agent:
+                return
+
+            # Obtener información del agente actual
+            provider = getattr(self.current_agent, 'provider', 'unknown')
+            model = getattr(self.current_agent, 'model_name', 'unknown')
+
+            # Estimar tokens (aproximación simple)
+            # 1 token ≈ 4 caracteres para modelos estándar
+            input_tokens = len(user_message) // 4
+            output_tokens = len(agent_response) // 4
+
+            # Si el agente tiene método para obtener uso real de tokens, usarlo
+            if hasattr(self.current_agent, 'get_last_token_usage'):
+                try:
+                    usage = self.current_agent.get_last_token_usage()
+                    if usage:
+                        input_tokens = usage.get('input_tokens', input_tokens)
+                        output_tokens = usage.get('output_tokens', output_tokens)
+                except:
+                    pass  # Usar estimación si falla
+
+            # Registrar en el token tracker
+            self.token_tracker.record_usage(
+                provider=provider,
+                model=model,
+                input_tokens=input_tokens,
+                output_tokens=output_tokens,
+                session_id=self.session_id
+            )
+
+            app_logger.info(f"Token usage tracked: {provider}:{model} - {input_tokens + output_tokens} tokens")
+
+        except Exception as e:
+            app_logger.error(f"Error tracking token usage: {e}")

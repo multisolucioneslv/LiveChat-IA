@@ -1,0 +1,13 @@
+{
+  "rules": {
+    "SEGURIDAD_GITHUB": {
+      "description": "NUNCA subir a GitHub archivos que contengan credenciales reales (.env, passwords, API keys)",
+      "severity": "CRÍTICO",
+      "context": "Se subió .env con credenciales a GitHub - IMPERDONABLE",
+      "created": "2025-09-22T09:00:10.692720",
+      "violations": []
+    }
+  },
+  "created": "2025-09-22T09:00:10.692526",
+  "updated": "2025-09-22T09:00:10.692725"
+}

@@ -45,6 +45,8 @@ class Navbar:
         self.menu_buttons = {}
         menu_items = [
             ("Inicio", "🏠"),
+            ("Beam", "⚡"),
+            ("Dashboard", "📊"),
             ("Configuraciones", "⚙️"),
             ("Administración", "👨‍💼")
         ]

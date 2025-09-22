@@ -17,7 +17,10 @@ from config.app_config import AppConfig
 from components.layout.navbar import Navbar
 from components.layout.footer import AnimatedFooter
 from components.ui.chat_interface import ChatInterface
+from components.ui.token_dashboard import TokenDashboard
+from components.ui.beam_comparison import BeamComparison
 from components.pages.agent_config_page import AgentConfigPage
+from components.pages.settings_page import SettingsPage
 from testing.test_agent import TestAgent
 
 
@@ -105,6 +108,12 @@ class LiveChatApp:
         # Sección Inicio - Chat
         self.sections["Inicio"] = self.create_inicio_section()
 
+        # Sección Beam - Comparación Multi-Modelo
+        self.sections["Beam"] = self.create_beam_section()
+
+        # Sección Dashboard - Tokens
+        self.sections["Dashboard"] = self.create_dashboard_section()
+
         # Sección Configuraciones
         self.sections["Configuraciones"] = self.create_configuraciones_section()
 
@@ -120,12 +129,32 @@ class LiveChatApp:
 
         return frame
 
+    def create_beam_section(self):
+        """Crea la sección de comparación multi-modelo Beam"""
+        frame = ctk.CTkFrame(self.content_frame, fg_color="transparent")
+
+        # Componente Beam
+        self.beam_comparison = BeamComparison(frame)
+        self.beam_comparison.pack(fill="both", expand=True)
+
+        return frame
+
+    def create_dashboard_section(self):
+        """Crea la sección del dashboard de tokens"""
+        frame = ctk.CTkFrame(self.content_frame, fg_color="transparent")
+
+        # Dashboard de tokens
+        self.token_dashboard = TokenDashboard(frame)
+        self.token_dashboard.pack(fill="both", expand=True)
+
+        return frame
+
     def create_configuraciones_section(self):
         """Crea la sección de configuraciones"""
         frame = ctk.CTkFrame(self.content_frame, fg_color="transparent")
 
-        # Página de configuración de agentes
-        self.agent_config_page = AgentConfigPage(frame)
+        # Nueva página de configuraciones completa
+        self.settings_page = SettingsPage(frame)
 
         return frame
 
