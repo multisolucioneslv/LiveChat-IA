@@ -20,9 +20,11 @@ wheels/
 .installed.cfg
 *.egg
 
-# Variables de entorno
+# Variables de entorno - NUNCA SUBIR CREDENCIALES
+.env
 .env.local
 .env.production
+.env.backup
 .venv
 env/
 venv/
